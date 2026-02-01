@@ -3,7 +3,7 @@ import './App.css';
 
 // Import the todo service from the sample app services barrel
 // NOTE: path points to the sibling `my-sample-app` project inside this workspace
-import { getTodos } from '../my-sample-app/src/services';
+import { getTodos } from './services';
 
 function App() {
   const [todos, setTodos] = useState([]);
