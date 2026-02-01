@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 
-// Import the todo service from the sample app services barrel
-// NOTE: path points to the sibling `my-sample-app` project inside this workspace
+// Import the todo service from the local services
 import { getTodos } from './services';
 
 function App() {
