@@ -1,0 +1,87 @@
+.tf-form {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tf-form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tf-label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}
+
+.tf-label--checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.tf-input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.tf-input--error {
+  border-color: #dc3545;
+}
+
+.tf-error {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.tf-alert {
+  padding: 12px;
+  margin-bottom: 16px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border-radius: 4px;
+  border: 1px solid #f5c6cb;
+}
+
+.tf-button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.tf-button {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.tf-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.tf-submit {
+  background-color: #007bff;
+  color: white;
+}
+
+.tf-cancel {
+  background-color: #6c757d;
+  color: white;
+}

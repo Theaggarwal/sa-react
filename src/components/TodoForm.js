@@ -17,6 +17,11 @@
  * - initialData: (Object) - Pre-filled form data for edit mode { id, title, completed, userId }
  * - onSubmitSuccess: (Function) - Callback when form is submitted successfully
  * - onCancel: (Function) - Callback when user cancels the form
+ * 
+ * Note: Yup: Yup is a JavaScript schema builder and validator used to declaratively define and 
+ * validate data shapes (strings, numbers, objects, arrays, nested structures). 
+ * It’s commonly used with form libraries (like React Hook Form) to keep validation logic centralized, 
+ * reusable, and easy to test.
  */
 
 import React, { useState } from 'react';
@@ -24,6 +29,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { addTodo, updateTodo } from '../services';
+import './TodoForm.css';
 
 // Validation schema using Yup
 const todoValidationSchema = yup.object().shape({
@@ -114,12 +120,12 @@ function TodoForm({ initialData, onSubmitSuccess, onCancel }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} style={styles.form}>
+    <form onSubmit={handleSubmit(onSubmit)} className="tf-form">
       <h2>{isEditMode ? 'Edit Todo' : 'Add New Todo'}</h2>
 
       {/* Title Field */}
-      <div style={styles.formGroup}>
-        <label htmlFor="title" style={styles.label}>
+      <div className="tf-form-group">
+        <label htmlFor="title" className="tf-label">
           Title *
         </label>
         <input
@@ -127,20 +133,17 @@ function TodoForm({ initialData, onSubmitSuccess, onCancel }) {
           type="text"
           placeholder="Enter todo title..."
           {...register('title')}
-          style={{
-            ...styles.input,
-            borderColor: errors.title ? '#dc3545' : '#ccc'
-          }}
+          className={`tf-input ${errors.title ? 'tf-input--error' : ''}`}
           disabled={isSubmitting}
         />
         {errors.title && (
-          <span style={styles.errorMessage}>{errors.title.message}</span>
+          <span className="tf-error">{errors.title.message}</span>
         )}
       </div>
 
       {/* Completed Checkbox */}
-      <div style={styles.formGroup}>
-        <label htmlFor="completed" style={{ ...styles.label, display: 'flex', alignItems: 'center' }}>
+      <div className="tf-form-group">
+        <label htmlFor="completed" className="tf-label tf-label--checkbox">
           <input
             id="completed"
             type="checkbox"
@@ -153,8 +156,8 @@ function TodoForm({ initialData, onSubmitSuccess, onCancel }) {
       </div>
 
       {/* User ID Field */}
-      <div style={styles.formGroup}>
-        <label htmlFor="userId" style={styles.label}>
+      <div className="tf-form-group">
+        <label htmlFor="userId" className="tf-label">
           User ID *
         </label>
         <input
@@ -162,32 +165,26 @@ function TodoForm({ initialData, onSubmitSuccess, onCancel }) {
           type="number"
           placeholder="Enter user ID (1-10)..."
           {...register('userId')}
-          style={{
-            ...styles.input,
-            borderColor: errors.userId ? '#dc3545' : '#ccc'
-          }}
+          className={`tf-input ${errors.userId ? 'tf-input--error' : ''}`}
           disabled={isSubmitting}
         />
         {errors.userId && (
-          <span style={styles.errorMessage}>{errors.userId.message}</span>
+          <span className="tf-error">{errors.userId.message}</span>
         )}
       </div>
 
       {/* Error Message Display */}
       {submitError && (
-        <div style={styles.alert}>
+        <div className="tf-alert">
           <strong>Error:</strong> {submitError}
         </div>
       )}
 
       {/* Form Actions */}
-      <div style={styles.buttonGroup}>
+      <div className="tf-button-group">
         <button
           type="submit"
-          style={{
-            ...styles.button,
-            ...styles.submitButton
-          }}
+          className="tf-button tf-submit"
           disabled={isSubmitting}
         >
           {isSubmitting ? 'Saving...' : isEditMode ? 'Update Todo' : 'Add Todo'}
@@ -195,10 +192,7 @@ function TodoForm({ initialData, onSubmitSuccess, onCancel }) {
         <button
           type="button"
           onClick={handleCancel}
-          style={{
-            ...styles.button,
-            ...styles.cancelButton
-          }}
+          className="tf-button tf-cancel"
           disabled={isSubmitting}
         >
           Cancel
