@@ -71,7 +71,7 @@ export async function getTodoById(id) {
 
 // Create a single axios instance for the service
 const apiClient2 = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: PUBLIC_TODOS_API_BASE_URL,
   timeout: 10000, // 10s timeout
   headers: {
     'Content-Type': 'application/json'

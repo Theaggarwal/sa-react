@@ -8,4 +8,6 @@ export const API_BASE_URL = trimTrailingSlashes(
     buildTimeApiBaseUrl || 'http://localhost:3001'
 );
 
-export const PUBLIC_TODOS_API_BASE_URL = 'https://jsonplaceholder.typicode.com';
+const publicApiBaseUrl = process.env.REACT_APP_PUBLIC_BASE_URL;
+
+export const PUBLIC_TODOS_API_BASE_URL = publicApiBaseUrl || 'https://jsonplaceholder1.typicode.com';
