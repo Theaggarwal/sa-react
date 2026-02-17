@@ -12,6 +12,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getTodos } from '../services';
 import { getApiTodos } from '../services/todoService';
+import { API_BASE_URL, PUBLIC_TODOS_API_BASE_URL } from '../config/api';
 
 function TodosListPage() {
   const [todos, setTodos] = useState([]);
@@ -59,7 +60,8 @@ function TodosListPage() {
     <div >
       <div style={{ padding: '20px' }}>
         <h1>From backend Service</h1>
-
+url: {API_BASE_URL }
+API: {PUBLIC_TODOS_API_BASE_URL}
             <table style={{ borderCollapse: 'collapse', width: '100%' }}>
             <thead>
               <tr>
