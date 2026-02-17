@@ -13,10 +13,11 @@
  */
 
 import axios from 'axios';
+import { API_BASE_URL, PUBLIC_TODOS_API_BASE_URL } from '../config/api';
 
 // Create a single axios instance for the service
 const apiClient = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com',
+  baseURL: PUBLIC_TODOS_API_BASE_URL,
   timeout: 10000, // 10s timeout
   headers: {
     'Content-Type': 'application/json'
@@ -68,10 +69,43 @@ export async function getTodoById(id) {
   }
 }
 
-export default {
+// Create a single axios instance for the service
+const apiClient2 = axios.create({
+  baseURL: API_BASE_URL,
+  timeout: 10000, // 10s timeout
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+
+export async function getApiTodos(params = {}) {
+  try {
+    const response = await apiClient2.get('/todos', { params });
+    return response.data;
+  } catch (error) {
+    // Normalize axios error
+    if (error.response) {
+      // Server responded with a status outside 2xx
+      const { status, data } = error.response;
+      throw new Error(`API error ${status}: ${data?.message || JSON.stringify(data)}`);
+    } else if (error.request) {
+      // Request made but no response received
+      throw new Error('No response received from Todos API');
+    }
+    // Something happened setting up the request
+    throw new Error(error.message || 'Unknown error fetching todos');
+  }
+}
+
+const todoService = {
   getTodos,
-  getTodoById
+  getTodoById,
+  getApiTodos,
+  addTodo,
+  updateTodo
 };
+
+export default todoService;
 
   /**
    * Create a new todo

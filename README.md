@@ -161,6 +161,41 @@ npm install
 
 ## 🚀 Getting Started
 
+## 🔧 API URL Configuration (Local + AWS Amplify)
+
+This app supports two API URL configuration modes:
+
+1. **Runtime config (no code change, no rebuild of JS bundle):**
+   - File: `public/runtime-config.js`
+   - Key: `window.__APP_CONFIG__.API_BASE_URL`
+   - Priority: **highest**
+
+2. **Build-time env config (standard CRA):**
+   - Variable: `REACT_APP_API_BASE_URL`
+   - Priority: used when runtime config is not set
+
+3. **Fallback:**
+   - `http://localhost:3001`
+
+### How to use locally
+
+- Copy `.env.example` to `.env` and set `REACT_APP_API_BASE_URL`
+- Or edit `public/runtime-config.js`
+
+### AWS Amplify: where to set API URL
+
+#### Option A: Amplify Environment Variables (requires redeploy)
+- In Amplify Console → App settings → Environment variables
+- Add `REACT_APP_API_BASE_URL=https://your-api-domain`
+- Trigger redeploy
+
+#### Option B: Runtime config (avoid code changes/rebuild)
+- Keep app code unchanged
+- Update the deployed `runtime-config.js` content to point to the new API URL
+- Because this file is loaded at runtime, your React bundle does not need code changes
+
+> Note: In CRA, `REACT_APP_*` values are baked at build time. For changing API URL without rebuilding app code, use `runtime-config.js`.
+
 ### Running the Application
 
 1. **Start the development server:**
